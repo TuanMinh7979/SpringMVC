@@ -16,10 +16,41 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "products2")
 public class Product implements Serializable {
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public Set<Nsx> getNsxS() {
+		return nsxS;
+	}
+
+	public void setNsxS(Set<Nsx> nsxS) {
+		this.nsxS = nsxS;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 
 	public Category getCategory1() {
 		return category1;
@@ -85,13 +116,6 @@ public class Product implements Serializable {
 		this.createDate = createDate;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
 
 	public Category getCategory() {
 		return category1;
@@ -104,25 +128,30 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Size(min = 5, max = 100, message = "{product.name.sizeErr}")
 	private String name;
 	private String description;
+	@Min(value = 10000, message = "{product.price.minErr}")
+	@Max(value = 10000000, message = "{product.price.maxErr}")
 	private BigDecimal price;
 	private String image;
 
 	@Column(name = "created_date")
 	@Temporal(javax.persistence.TemporalType.DATE)
 	private Date createDate;
-	private boolean active;
+	private int active;
 
 	// many to one thi phai la eager
 	@ManyToOne
 	@JoinColumn(name = "category_id")
+	@NotNull(message = "{product.category1.nullErr}")
 	private Category category1;
 	@ManyToMany
-	@JoinTable(name = "product_nsx", 
-	       joinColumns = { @JoinColumn(name = "product_id") },
-	       inverseJoinColumns = {@JoinColumn(name = "nsx_id") })
+	@JoinTable(name = "product_nsx", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "nsx_id") })
 	private Set<Nsx> nsxS;
+	@Transient
+	private MultipartFile file;
 
 	public Product() {
 

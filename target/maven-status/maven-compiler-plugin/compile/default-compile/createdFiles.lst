@@ -1,0 +1,17 @@
+com\StaticRs\repo\CategoryRepo.class
+com\StaticRs\repo\impl\CategoryRepoImpl.class
+com\StaticRs\SpringProjectCfg.class
+com\StaticRs\repo\ProductRepo.class
+com\StaticRs\controller\ProductController.class
+com\StaticRs\pojo\Product.class
+com\StaticRs\repo\impl\ProductRepoImpl.class
+com\StaticRs\service\CategoryService.class
+com\StaticRs\service\ProductService.class
+com\StaticRs\KhoitaoWebXml.class
+com\StaticRs\service\impl\ProductServiceImpl.class
+com\StaticRs\HibernateConfig.class
+com\StaticRs\controller\HomeController.class
+com\StaticRs\tileConfig.class
+com\StaticRs\pojo\Category.class
+com\StaticRs\pojo\Nsx.class
+com\StaticRs\service\impl\CategoryServiceImpl.class

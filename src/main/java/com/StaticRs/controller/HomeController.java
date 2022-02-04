@@ -15,11 +15,12 @@ public class HomeController {
 	private CategoryService categorySv;
 	@Autowired
 	private ProductService productSv;
+
 	@RequestMapping("/")
-	public String Trangchu(Model model,@RequestParam(value="kw",required=false, defaultValue="" ) String kw) {
-        model.addAttribute("categories",this.categorySv.getCategories());
+	public String Trangchu(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
+		model.addAttribute("categories", this.categorySv.getCategories());
 		model.addAttribute("products", this.productSv.getProducts(kw));
-		System.out.println("KEYWORD LA :  "+kw);
-        return "index";
+		System.out.println("KEYWORD LA :  " + kw);
+		return "index";
 	}
 }
