@@ -6,4 +6,5 @@ import com.StaticRs.pojo.Product;
 
 public interface ProductService  {
 	List<Product> getProducts(String kw);
+	boolean addOrUpdate(Product product);
 }

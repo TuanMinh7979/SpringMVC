@@ -17,7 +17,7 @@
 		<div class="card col-md-4">
 			<div class="card-body">
 				<img class="img-fluid"
-					src="<c:url value='/resource/img/ip13.jpg' />">
+					src="<c:url value="/resource/img/${p.image}" />">
 			</div>
 			<div class="card-footer">
 				<h3>${p.name}</h3>

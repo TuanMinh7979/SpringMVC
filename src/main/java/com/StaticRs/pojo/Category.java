@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "categories")
 public class Category implements Serializable {
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Set<Product> getProducts() {
 		return products;
 	}

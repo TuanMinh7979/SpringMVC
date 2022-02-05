@@ -20,6 +20,7 @@ import com.StaticRs.repo.ProductRepo;
 @Repository
 @Transactional
 public class ProductRepoImpl implements ProductRepo {
+
 	@Autowired
 	private LocalSessionFactoryBean ses;
 
@@ -39,4 +40,19 @@ public class ProductRepoImpl implements ProductRepo {
 		Query q = ss.createQuery(Cq);
 		return q.getResultList();
 	}
+	@Override
+	public boolean addOrUpdate(Product product) {
+		Session session=this.ses.getObject().getCurrentSession();
+		
+		try {
+			session.save(product);
+			return true;
+		}catch(Exception ex) {
+			System.err.println("==ADD product Err"+ex.getMessage());
+			ex.printStackTrace();
+			
+		}
+		return false;
+	}
+
 }

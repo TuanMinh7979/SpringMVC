@@ -116,7 +116,6 @@ public class Product implements Serializable {
 		this.createDate = createDate;
 	}
 
-
 	public Category getCategory() {
 		return category1;
 	}
@@ -155,5 +154,23 @@ public class Product implements Serializable {
 
 	public Product() {
 
+	}
+
+	public Product( @Size(min = 5, max = 100, message = "{product.name.sizeErr}") String name,
+			String description,
+			@Min(value = 10000, message = "{product.price.minErr}") @Max(value = 10000000, message = "{product.price.maxErr}") BigDecimal price,
+			String image, Date createDate, int active,
+			@NotNull(message = "{product.category1.nullErr}") Category category1, Set<Nsx> nsxS, MultipartFile file) {
+		super();
+		
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.image = image;
+		this.createDate = createDate;
+		this.active = active;
+		this.category1 = category1;
+		this.nsxS = nsxS;
+		this.file = file;
 	}
 }
