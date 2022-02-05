@@ -25,7 +25,7 @@ public class ProductRepoImpl implements ProductRepo {
 	private LocalSessionFactoryBean ses;
 
 	@Override
-	public List<Product> getProducts(String kw) {
+	public List<Product> getProducts(String kw, int page) {
 		// TODO Auto-generated method stub
 		Session ss = this.ses.getObject().getCurrentSession();
 		CriteriaBuilder builder = ss.getCriteriaBuilder();
@@ -33,26 +33,42 @@ public class ProductRepoImpl implements ProductRepo {
 		Root root = Cq.from(Product.class);
 
 		Cq = Cq.select(root);
-		if (!kw.isEmpty() && kw != null) {
-			Predicate p = builder.like(root.get("name").as(String.class), String.format("%%s%%", kw));
-	        Cq=Cq.where(p);	
+
+		if (kw == null)
+			kw = "";
+		if (!kw.isEmpty()) {
+			Predicate p = builder.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
+			Cq = Cq.where(p);
 		}
 		Query q = ss.createQuery(Cq);
+
+		int max = 3;
+		q.setMaxResults(max);
+		q.setFirstResult((page - 1) * max);
+
 		return q.getResultList();
 	}
+
 	@Override
 	public boolean addOrUpdate(Product product) {
-		Session session=this.ses.getObject().getCurrentSession();
-		
+		Session session = this.ses.getObject().getCurrentSession();
+
 		try {
 			session.save(product);
 			return true;
-		}catch(Exception ex) {
-			System.err.println("==ADD product Err"+ex.getMessage());
+		} catch (Exception ex) {
+			System.err.println("==ADD product Err" + ex.getMessage());
 			ex.printStackTrace();
-			
+
 		}
 		return false;
+	}
+
+	@Override
+	public long countProduct() {
+		Session session = this.ses.getObject().getCurrentSession();
+		Query q = session.createQuery("Select Count(*) From Product");
+		return Long.parseLong(q.getSingleResult().toString());
 	}
 
 }

@@ -3,6 +3,7 @@ package com.StaticRs.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class ProductServiceImpl implements ProductService {
 	private ProductRepo repo;
 
 	@Override
-	public List<Product> getProducts(String kw) {
+	public List<Product> getProducts(String kw, int page) {
 		// TODO Auto-generated method stub
-		return repo.getProducts(kw);
+		return repo.getProducts(kw, page);
 	}
 
 	@Override
@@ -45,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
 
 	
 
+	}
+
+	@Override
+	public long countProduct() {
+		
+		return repo.countProduct();
 	}
 
 }

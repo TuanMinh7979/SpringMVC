@@ -1,5 +1,7 @@
 package com.StaticRs.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +27,10 @@ public class HomeController {
 	}
 
 	@RequestMapping("/")
-	public String Trangchu(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
-		model.addAttribute("categories", this.categorySv.getCategories());
-		model.addAttribute("products", this.productSv.getProducts(kw));
-		System.out.println("KEYWORD LA :  " + kw);
+	public String Trangchu(Model model, @RequestParam(required = false) Map<String, String> param) {
+		int page = Integer.parseInt(param.getOrDefault("page", "1"));
+		model.addAttribute("products", this.productSv.getProducts(param.get("kw"), page));
+        model.addAttribute("counter", this.productSv.countProduct());
 		return "index";
 	}
 }
