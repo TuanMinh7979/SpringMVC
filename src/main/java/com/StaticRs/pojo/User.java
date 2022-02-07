@@ -8,10 +8,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -107,8 +116,10 @@ public class User implements Serializable {
 	private String phone;
 	private String username;
 	private String password;
+	@Transient
+	private String confirmPassword;
 	private String active;
-	@Column(name="user_role")
+	@Column(name = "user_role")
 	private String userRole;
 
 }

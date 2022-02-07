@@ -36,7 +36,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/").failureUrl("/login?error");
-        http.csrf().disable();
+		http.formLogin().defaultSuccessUrl("/").failureUrl("/login?error");
+		http.logout().logoutSuccessUrl("/login");
+		http.exceptionHandling().accessDeniedPage("/login?accessDenied");
+		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+		http.csrf().disable();
 	}
 }

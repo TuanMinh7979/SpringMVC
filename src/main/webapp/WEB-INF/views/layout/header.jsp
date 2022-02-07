@@ -18,13 +18,15 @@
 				<li class="nav-item"><a class="nav-link" href="#">${cat.name}</a>
 				</li>
 			</c:forEach>
+			<li class="nav-item active"><a class="nav-link textdanger"
+					href="<c:url value="/register"/>">Dang ky</a></li>
 			<c:if test="${pageContext.request.userPrincipal.name==null }">
 				<li class="nav-item active"><a class="nav-link textdanger"
 					href="<c:url value="/login"/>">Dang nhap</a></li>
 			</c:if>
 			<c:if test="${pageContext.request.userPrincipal.name!=null }">
 				<li class="nav-item active"><a class="nav-link textdanger"
-					href="<c:url value="/"/>">${pageContext.request.userPrincipal.name}
+					href="<c:url value="/logout"/>">${pageContext.request.userPrincipal.name}
 				</a></li>
 			</c:if>
 		</ul>

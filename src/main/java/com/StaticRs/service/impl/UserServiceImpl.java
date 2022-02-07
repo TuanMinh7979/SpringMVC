@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.StaticRs.pojo.User;
@@ -20,6 +21,9 @@ import com.StaticRs.service.UserService;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepo userRepo;
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,6 +40,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
+		String password = user.getPassword();
+		user.setPassword(this.passwordEncoder.encode(password));
+		user.setUserRole(User.USER);
+
 		return this.userRepo.addUser(user);
 	}
 

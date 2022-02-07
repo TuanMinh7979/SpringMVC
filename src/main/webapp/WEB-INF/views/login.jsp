@@ -5,6 +5,10 @@
 <c:if test="${param.error!=null}">
 	<div class="alert alert-danger">Loi dang nhap</div>
 </c:if>
+<c:if test="${param.accessDenied!=null}">
+	<div class="alert alert-danger">Khong co quyen truy cap</div>
+</c:if>
+
 <h1 class="text-center text-danger">DANG NHAP</h1>
 <form action="${action}" method="post">
 	<div class="form-group">

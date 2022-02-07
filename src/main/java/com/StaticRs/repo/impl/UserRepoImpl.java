@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.StaticRs.pojo.User;
 import com.StaticRs.repo.UserRepo;
+
 @Repository
 @Transactional
 public class UserRepoImpl implements UserRepo {
@@ -27,6 +29,13 @@ public class UserRepoImpl implements UserRepo {
 	public boolean addUser(User user) {
 
 		// TODO Auto-generated method stub
+		Session session = ses.getObject().getCurrentSession();
+		try {
+			session.save(user);
+			return true;
+		} catch (HibernateException ex) {
+			System.err.println(ex.getMessage());
+		}
 		return false;
 	}
 
@@ -47,7 +56,6 @@ public class UserRepoImpl implements UserRepo {
 		Query qu = session.createQuery(q);
 		return qu.getResultList();
 
-		
 	}
 
 }
