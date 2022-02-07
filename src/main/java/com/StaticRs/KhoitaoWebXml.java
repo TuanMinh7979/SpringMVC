@@ -9,7 +9,7 @@ public class KhoitaoWebXml extends AbstractAnnotationConfigDispatcherServletInit
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class<?>[] {SpringProjectCfg.class, HibernateConfig.class, tileConfig.class};
+		return new Class<?>[] {SpringProjectCfg.class, HibernateConfig.class, tileConfig.class, SpringSecurityConfig.class};
 	}
 
 	@Override
