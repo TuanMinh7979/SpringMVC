@@ -38,8 +38,13 @@
 					src="<c:url value="/resource/img/${p.image}" />">
 			</div>
 			<div class="card-footer">
-				<h3>${p.name}</h3>
-				<p>${p.price}</p>
+			<div><h3>${p.name}</h3>
+				<p>${p.price}</p></div>
+				<div>
+				<a href="javascript:;" class="btn btn-danger" onclick="addToCart(${p.id})">Them vao gio</a>
+				<a class="btn btn-info">Mua ngay</a>
+				</div>
+				
 			</div>
 		</div>
 	</c:forEach>

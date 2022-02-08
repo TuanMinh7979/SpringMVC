@@ -28,30 +28,34 @@ public class ProductServiceImpl implements ProductService {
 	public boolean addOrUpdate(Product product) {
 		MultipartFile img = product.getFile();
 		String rootdir = "C:\\Users\\ASUS\\eclipse-workspace\\StaticResoure\\src\\main\\webapp\\resources\\img\\";
-	
-			System.out.println("vao day upload");
-			String linktoimg= rootdir + product.getFile().getOriginalFilename();
-			System.out.println(linktoimg);
-			try {
-				img.transferTo(new File(linktoimg));
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			product.setImage(product.getFile().getOriginalFilename());
-			return repo.addOrUpdate(product);
 
-	
+		System.out.println("vao day upload");
+		String linktoimg = rootdir + product.getFile().getOriginalFilename();
+		System.out.println(linktoimg);
+		try {
+			img.transferTo(new File(linktoimg));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		product.setImage(product.getFile().getOriginalFilename());
+		return repo.addOrUpdate(product);
 
 	}
 
 	@Override
 	public long countProduct() {
-		
+
 		return repo.countProduct();
+	}
+
+	@Override
+	public Product getProductById(int productId) {
+		// TODO Auto-generated method stub
+		return repo.getProductById(productId);
 	}
 
 }

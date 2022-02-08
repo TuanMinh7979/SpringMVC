@@ -34,9 +34,7 @@ public class ProductRepoImpl implements ProductRepo {
 
 		Cq = Cq.select(root);
 
-		if (kw == null)
-			kw = "";
-		if (!kw.isEmpty()) {
+		if (kw != null && !kw.isEmpty()) {
 			Predicate p = builder.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
 			Cq = Cq.where(p);
 		}
@@ -69,6 +67,13 @@ public class ProductRepoImpl implements ProductRepo {
 		Session session = this.ses.getObject().getCurrentSession();
 		Query q = session.createQuery("Select Count(*) From Product");
 		return Long.parseLong(q.getSingleResult().toString());
+	}
+
+	@Override
+	public Product getProductById(int productId) {
+		// TODO Auto-generated method stub
+		Session session = this.ses.getObject().getCurrentSession();
+		return session.get(Product.class, productId);
 	}
 
 }

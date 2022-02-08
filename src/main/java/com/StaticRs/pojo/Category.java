@@ -42,8 +42,8 @@ public class Category implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	// BY DEFAULT
-	@OneToMany(mappedBy = "category1", fetch = FetchType.LAZY)
+	// BY DEFAULT la lazy
+	@OneToMany(mappedBy = "category",fetch=FetchType.EAGER)
 	private Set<Product> products;
 
 	public Category() {

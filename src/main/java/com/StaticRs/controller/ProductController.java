@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.StaticRs.pojo.Product;
 import com.StaticRs.service.ProductService;
@@ -27,7 +26,7 @@ public class ProductController {
 	private ProductService productSv;
 	@Autowired
 	private WebAppValidator productValidator;
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(productValidator);
@@ -48,14 +47,13 @@ public class ProductController {
 //		System.out.println("REAL PATH IS: " + rootdir);
 
 		if (!rs.hasErrors()) {
-			if(productSv.addOrUpdate(newProduct)) {
+			if (productSv.addOrUpdate(newProduct)) {
 				return "redirect:/";
-			}else {
-				model.addAttribute("errMsg","Something wrongs!");
+			} else {
+				model.addAttribute("errMsg", "Something wrongs!");
 			}
 		}
 
-		
 		return "products";
 
 	}

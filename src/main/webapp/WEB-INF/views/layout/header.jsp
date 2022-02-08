@@ -11,7 +11,7 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
-			<li class="nav-item active"><a class="nav-link" href="#">Home
+			<li class="nav-item active"><a class="nav-link" href="<c:url value="/"/>">Home
 					<span class="sr-only">(current)</span>
 			</a></li>
 			<c:forEach var="cat" items="${categories}">
@@ -19,7 +19,7 @@
 				</li>
 			</c:forEach>
 			<li class="nav-item active"><a class="nav-link textdanger"
-					href="<c:url value="/register"/>">Dang ky</a></li>
+				href="<c:url value="/register"/>">Dang ky</a></li>
 			<c:if test="${pageContext.request.userPrincipal.name==null }">
 				<li class="nav-item active"><a class="nav-link textdanger"
 					href="<c:url value="/login"/>">Dang nhap</a></li>
@@ -28,7 +28,12 @@
 				<li class="nav-item active"><a class="nav-link textdanger"
 					href="<c:url value="/logout"/>">${pageContext.request.userPrincipal.name}
 				</a></li>
+				<li class="nav-item active"><a class="nav-link textdanger"
+					href="<c:url value="/cart"/>">Gio hang<span
+						class="badge badge-danger" id="cartCounter">${cartCounter}</span>
+				</a></li>
 			</c:if>
+
 		</ul>
 	</div>
 </nav>

@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h1 class="text-center text-danger">QUAN LY SAN PHAM</h1>
+<!--  
 <c:url value="/admin/products" var="action" />
 <c:if test="${errMsg!=null}">${errMsg}</c:if>
 <form:form method="post" action="${action}" modelAttribute="product"
@@ -50,4 +51,5 @@
 	</div>
 
 </form:form>
+-->
 

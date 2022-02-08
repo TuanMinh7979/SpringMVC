@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +13,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "nsx")
 public class Nsx implements Serializable {
+
+//	public List<Product> getProducts() {
+//		return products;
+//	}
+//
+//	public void setProducts(List<Product> products) {
+//		this.products = products;
+//	}
 	public Set<Product> getProducts() {
 		return products;
 	}
@@ -54,16 +61,10 @@ public class Nsx implements Serializable {
 
 	}
 
-	public Nsx(int id, String name, String country) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.country = country;
-	}
-
 	private String name;
 	private String country;
 
-	@ManyToMany(mappedBy = "nsxS", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "nsxS")
+//	private List<Product> products;
 	private Set<Product> products;
 }

@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <h1 class="text-center text-danger">CHI TIET</h1>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<div>
+		<a href="<c:url value='/admin/products'/>" class="btn">Ve admin</a>
+	</div>
+</sec:authorize>
 <form action="">
 	<div class="row">
 		<div class="col-md-10">
@@ -15,9 +22,12 @@
 </form>
 <div>
 	<ul class="pagination">
-		<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		
+		<c:forEach begin="1" end="${Math.ceil(counter/3)}" var="i">
+			<li class="page-item"><a class="page-link"
+				href="<c:url value="/"/>?page=${i}">${i}</a></li>
+		</c:forEach>
+
+
 	</ul>
 </div>
 <div class="row">
@@ -28,8 +38,13 @@
 					src="<c:url value="/resource/img/${p.image}" />">
 			</div>
 			<div class="card-footer">
-				<h3>${p.name}</h3>
-				<p>${p.price}</p>
+			<div><h3>${p.name}</h3>
+				<p>${p.price}</p></div>
+				<div>
+				<a href="javascript:;" class="btn btn-danger" onclick="addToCart(${p.id})">Them vao gio</a>
+				<a class="btn btn-info">Mua ngay</a>
+				</div>
+				
 			</div>
 		</div>
 	</c:forEach>

@@ -24,17 +24,12 @@ import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "products2")
+
 public class Product implements Serializable {
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
-	}
 
 	public Set<Nsx> getNsxS() {
 		return nsxS;
@@ -44,6 +39,27 @@ public class Product implements Serializable {
 		this.nsxS = nsxS;
 	}
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+//	public List<Nsx> getNsxS() {
+//		return nsxS;
+//	}
+//
+//	public void setNsxS(List<Nsx> nsxS) {
+//		this.nsxS = nsxS;
+//	}
+
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -52,21 +68,6 @@ public class Product implements Serializable {
 		this.file = file;
 	}
 
-	public Category getCategory1() {
-		return category1;
-	}
-
-	public void setCategory1(Category category1) {
-		this.category1 = category1;
-	}
-
-	public Set<Nsx> getNsxs() {
-		return nsxS;
-	}
-
-	public void setNsxs(Set<Nsx> nsxs) {
-		nsxS = nsxs;
-	}
 
 	public int getId() {
 		return id;
@@ -117,11 +118,11 @@ public class Product implements Serializable {
 	}
 
 	public Category getCategory() {
-		return category1;
+		return category;
 	}
 
 	public void setCategory(Category category) {
-		this.category1 = category;
+		this.category = category;
 	}
 
 	@Id
@@ -141,14 +142,22 @@ public class Product implements Serializable {
 	private int active;
 
 	// many to one thi phai la eager
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	@NotNull(message = "{product.category1.nullErr}")
-	private Category category1;
+	@JsonIgnore
+	private Category category;
+
+	@JsonIgnore
 	@ManyToMany
+
 	@JoinTable(name = "product_nsx", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "nsx_id") })
+
+//	private List<Nsx> nsxS; ha thap phien ban jackson databind
 	private Set<Nsx> nsxS;
+
 	@Transient
 	private MultipartFile file;
 
@@ -156,21 +165,4 @@ public class Product implements Serializable {
 
 	}
 
-	public Product( @Size(min = 5, max = 100, message = "{product.name.sizeErr}") String name,
-			String description,
-			@Min(value = 10000, message = "{product.price.minErr}") @Max(value = 10000000, message = "{product.price.maxErr}") BigDecimal price,
-			String image, Date createDate, int active,
-			@NotNull(message = "{product.category1.nullErr}") Category category1, Set<Nsx> nsxS, MultipartFile file) {
-		super();
-		
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.image = image;
-		this.createDate = createDate;
-		this.active = active;
-		this.category1 = category1;
-		this.nsxS = nsxS;
-		this.file = file;
-	}
 }

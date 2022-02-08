@@ -26,6 +26,9 @@
 		<tiles:insertAttribute name="content" />
 		<tiles:insertAttribute name="footer" />
 	</div>
+	<script src ="<c:url value="/resource/js/main.js"/>" type="text/javascript">
+	
+	</script>
 
 </body>
 </html>
